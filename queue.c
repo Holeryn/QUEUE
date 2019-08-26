@@ -11,7 +11,7 @@ struct node{
     struct node *next;
 };
 
-struct stack_type{
+struct queue_type{
     struct node *top;
 };
 
