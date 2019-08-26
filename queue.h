@@ -12,7 +12,7 @@
 typedef int bool;
 typedef int Item;
 
-typedef struct stack_type *queue;
+typedef struct queue_type *queue;
 
 /*
 name : create
