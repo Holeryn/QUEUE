@@ -1,6 +1,8 @@
 /*########### DICHIRAZIONI PER IL PREPROCESSORE ###########*/
 #include <stdlib.h>
 #include <stdio.h>
+#include <assert.h>
+
 #include "queue.h"
 
 PRIVATE void make_empty(queue s);
@@ -28,8 +30,7 @@ PUBLIC void push(queue q,Item n)
 {
     struct node *new_node = malloc(sizeof(queue));
     
-    if(new_node == NULL)
-        printf("ERRORE + %d",__LINE__);
+    assert(new_node != NULL);
     
     new_node->data = n;
     new_node->next = q->top;
@@ -45,15 +46,15 @@ return = none (void)
 */
 PUBLIC void pop(queue q)
 {
-    if(!is_empty(q)){
-        struct node *new_node;
-        new_node = malloc(sizeof(queue));
 
-        new_node->next = q->top->next;
-        free(q->top);
-        q->top = new_node->next;
-    }else
-        printf("ERRORE + %d",__LINE__);
+    struct node *new_node;
+    new_node = malloc(sizeof(queue));
+
+    new_node->next = q->top->next;
+    free(q->top);
+    q->top = new_node->next;
+    
+    assert(!is_empty(q));
 }
 
 /*
@@ -98,8 +99,9 @@ return = queue
 PUBLIC queue create(void)
 {
     queue s = malloc(sizeof(queue));
-    if(s == NULL)
-        printf("ERRORE + %d",__LINE__);
+
+    assert(s != NULL);
+
     s->top = NULL;
     return s;
 }
